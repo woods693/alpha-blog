@@ -40,8 +40,13 @@ class ArticlesController < ApplicationController
     @article_all = Article.all
   end
   
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+    flash[:notice] = "Article #{@article.id} successfully destroyed"
+    redirect_to articles_path
+  end
 
-  
   private
     def article_params
       #from the params hash, we will allow it to be passed in
