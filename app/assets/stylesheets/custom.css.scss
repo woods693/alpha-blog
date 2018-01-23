@@ -1,3 +1,45 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+#logo{
+ float: left;
+ font-size: 1.7em;
+ color: white;
+ text-transform: uppercase;
+ letter-spacing: -1px;
+ font-weight: bold;
+}
+
+#logo:hober {
+  color: white;
+  text-decoration: none;
+}
+
+.jumbotron{
+  background-image: asset-url('bookshelf.jpg');
+  background-size: cover;
+  height: 550px;
+}
+
+.homepage-container{
+  background-color: #222;
+  color: white;
+  margin-bottom: 30px;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+.btn-lg{
+  font-size: 1.0em;
+  background-color: green;
+  
+}
+
+.footer{
+  margin-top: 40px;
+  padding-top: 5px;
+  border-top: 1px solid black;
+  color: #777;
+}
