@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  before_action :find_param, only: [:show, :edit, :update, :destroy]
   
   def new
     @article = Article.new
@@ -19,15 +20,12 @@ class ArticlesController < ApplicationController
   end
   
   def show
-    @article = Article.find(params[:id])
   end
   
   def edit
-    @article = Article.find(params[:id])
   end
   
   def update
-    @article = Article.find(params[:id])
     if @article.update(article_params)
       flash[:notice] = "article has been successfully updated"
       redirect_to article_path(@article)
@@ -41,7 +39,6 @@ class ArticlesController < ApplicationController
   end
   
   def destroy
-    @article = Article.find(params[:id])
     @article.destroy
     flash[:notice] = "Article #{@article.id} successfully destroyed"
     redirect_to articles_path
@@ -52,6 +49,11 @@ class ArticlesController < ApplicationController
       #from the params hash, we will allow it to be passed in
       #then this method will be called by create, and the value will be saved
       params.require(:article).permit(:title, :description)
+    end
+    
+    #method for show, edit, update, destroy
+    def find_param
+      @article = Article.find(params[:id])
     end
   
 end
