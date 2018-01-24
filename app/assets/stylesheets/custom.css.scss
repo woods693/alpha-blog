@@ -20,7 +20,7 @@
 .jumbotron{
   background-image: asset-url('bookshelf.jpg');
   background-size: cover;
-  height: 550px;
+  height: 1000px;
 }
 
 .homepage-container{
@@ -33,13 +33,13 @@
 
 .btn-lg{
   font-size: 1.0em;
-  background-color: green;
-  
 }
 
 .footer{
   margin-top: 40px;
   padding-top: 5px;
-  border-top: 1px solid black;
   color: #777;
+  
+  position: fixed;
+  bottom: 20px;
 }
