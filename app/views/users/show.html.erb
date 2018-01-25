@@ -1,0 +1,12 @@
+<h1 align="center">Showing article by: <%= @user.username %> </h1>
+
+
+<div class="row" style="margin:40px">
+  <div align="center">
+    <%= gravatar_for @user, size: 150 %>
+    <h4><%= @user.username %>'s Avatar </h4>
+  </div>
+</div>
+
+<%= render '/articles/article', obj: @user.articles %>
+  
