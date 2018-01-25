@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   root "pages#homepage"
   get "about", to: "pages#about"
   
+  get "signup", to: "users#new"
+  resources :users, except: [:new]
+  
   # this gives most of the CRUD routes
   resources :articles
   #get "articles/new", to: "articles#new"
