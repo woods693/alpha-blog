@@ -1,6 +1,4 @@
 <h1 align="center">Showing article by: <%= @user.username %> </h1>
-
-
 <div class="row" style="margin:40px">
   <div align="center">
     <%= gravatar_for @user, size: 150 %>
@@ -8,5 +6,11 @@
   </div>
 </div>
 
-<%= render '/articles/article', obj: @user.articles %>
+<div align="center">
+  <%= will_paginate @user_articles %>
+</div>
+<%= render '/articles/article', obj: @user_articles %>
+<div align="center">
+  <%= will_paginate @user_articles %>
+</div>
   
