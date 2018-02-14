@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :find_param, only: [:edit, :update, :show]
-  
+  before_action :require_user, only: [:edit, :update]
   def new
     @user = User.new  
   end
@@ -46,6 +46,16 @@ class UsersController < ApplicationController
   
   def find_param
     @user = User.find(params[:id])
+  end
+  
+  def require_user
+    if !logged_in?
+      flash[:danger] = "You must login to perform this action"
+      redirect_to root_path
+    elsif current_user != @user
+      flash[:danger] = "You cannot edit this account"
+      redirect_to users_path
+    end
   end
   
 end

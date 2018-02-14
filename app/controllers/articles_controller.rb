@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :find_param, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:show, :index]
   
   def new
     @article = Article.new
@@ -8,7 +9,9 @@ class ArticlesController < ApplicationController
   def create
     #render plain: params[:article].inspect
     @article = Article.new(article_params)
-    @article.user = User.first  #hard coded user for now
+    User.find_by_id(session[:username])
+    @article.user = User.find_by_id(session[:user_id]) #hard coded user for now
+    
     if @article.save
       flash[:success] = "The article successfully saved"
       redirect_to article_path(@article)
@@ -55,6 +58,16 @@ class ArticlesController < ApplicationController
     #method for show, edit, update, destroy
     def find_param
       @article = Article.find(params[:id])
+    end
+    
+    def require_user
+      if !logged_in?
+        flash[:danger] = "You must login to perform this action"
+        redirect_to root_path
+      elsif current_user != @article.user
+        flash[:danger] = "You do not have access to this action"
+        redirect_to root_path
+      end
     end
   
 end
