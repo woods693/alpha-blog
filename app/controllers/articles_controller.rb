@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :find_param, only: [:show, :edit, :update, :destroy]
   before_action :require_user, except: [:show, :index]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   
   def new
     @article = Article.new
@@ -9,8 +10,7 @@ class ArticlesController < ApplicationController
   def create
     #render plain: params[:article].inspect
     @article = Article.new(article_params)
-    User.find_by_id(session[:username])
-    @article.user = User.find_by_id(session[:user_id]) #hard coded user for now
+    @article.user = current_user 
     
     if @article.save
       flash[:success] = "The article successfully saved"
@@ -64,10 +64,13 @@ class ArticlesController < ApplicationController
       if !logged_in?
         flash[:danger] = "You must login to perform this action"
         redirect_to root_path
-      elsif current_user != @article.user
+      end
+    end
+    
+    def correct_user
+      if current_user != @article.user
         flash[:danger] = "You do not have access to this action"
         redirect_to root_path
       end
     end
-  
 end
