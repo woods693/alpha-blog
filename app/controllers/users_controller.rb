@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :find_param, only: [:edit, :update, :show]
-  before_action :require_user, only: [:edit, :update]
+  before_action :require_user, only: [:edit, :update, :destroy]
+  before_action :cannot_be_logged_in, only: [:create]
+  
   def new
     @user = User.new  
   end
@@ -38,6 +40,13 @@ class UsersController < ApplicationController
     @users = User.paginate(page: params[:page], per_page: 6)
   end
   
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:danger] = "User and all articles created by user deleted."
+    redirect_to users_path
+  end
+  
   
   private
   def user_params
@@ -49,11 +58,18 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   
+  def cannot_be_logged_in
+    if logged_in?
+      flash[:danger] = "You must logout to make new account"
+      redirect_to articles_path
+    end
+  end
+  
   def require_user
     if !logged_in?
       flash[:danger] = "You must login to perform this action"
       redirect_to root_path
-    elsif current_user != @user
+    elsif current_user != @user && current_user.admin == false
       flash[:danger] = "You cannot edit this account"
       redirect_to users_path
     end

@@ -68,7 +68,7 @@ class ArticlesController < ApplicationController
     end
     
     def correct_user
-      if current_user != @article.user
+      if current_user != @article.user && current_user.admin == false
         flash[:danger] = "You do not have access to this action"
         redirect_to root_path
       end

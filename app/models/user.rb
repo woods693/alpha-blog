@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   #setting up one to many association
-  has_many :articles
+  has_many :articles, dependent: :destroy
   #before user hits database, turns email to lowercase before storing
   before_save {self.email = email.downcase}
   

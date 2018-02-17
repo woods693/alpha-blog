@@ -1,3 +1,7 @@
 <h1 align="center"> Sign up for the Blog </h1>
 
-<%= render 'form' %>
+<% if !logged_in? %>
+  <%= render 'form' %>
+<% else %>
+  <h2 align="center"> You must sign out to make account </h2>
+<% end %>
