@@ -52,7 +52,8 @@ class ArticlesController < ApplicationController
     def article_params
       #from the params hash, we will allow it to be passed in
       #then this method will be called by create, and the value will be saved
-      params.require(:article).permit(:title, :description)
+      #category_ids will be sent as array form
+      params.require(:article).permit(:title, :description, category_ids: [])
     end
     
     #method for show, edit, update, destroy
