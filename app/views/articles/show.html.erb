@@ -17,11 +17,16 @@
             </li>
           </ul>
         </div>
-        <h4><strong>Description:</strong></h4>
-          <hr> 
-            <%= simple_format(@article.description) %> 
-          </hr>
+        <div>
+          <h4><strong>Description:</strong></h4>
+            <hr> 
+              <%= simple_format(@article.description) %> 
+            </hr>
+        </div>
       </div>
+      <% if @article.categories.any? %>
+        <%= render @article.categories %>
+      <% end %>
   </div>
 </div>
 <div class="row">

@@ -64,6 +64,17 @@
 }
 
 .listing{
- list-style: none;
- padding-left: 0;
+  list-style: none;
+  padding-left: 0;
+}
+
+.badge{
+  background-color: #CEF6F0;
+  text-transform: uppercase; 
+  font-weight: bold;
+}
+
+.input_checkbox input{
+  width: auto !important;
+
 }
