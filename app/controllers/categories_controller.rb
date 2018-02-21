@@ -31,7 +31,7 @@ before_action :find_category, only: [:show, :edit, :update]
   
   def update
     if @category.update(category_param)
-      flash[:success] = "The category has been successfully updated"
+      flash[:success] = "The category is successfully updated"
       redirect_to category_path(@category)
     else
       render "edit"
